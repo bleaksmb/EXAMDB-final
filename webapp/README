@@ -1,10 +1,11 @@
 To start the application on the development server:
 
- 1. Right click in the 'webapp' folder
- 2. Select 'Open in Terminal'
- 3. Type './start_application.sh' in the terminal window
- 4. Open Firefox and got to 'localhost:3000' 
+ 1. Run examdbstart.bat as admin
+ 2. Click on start_application.sh
+ 3. minimise all open windows (do not close them)
+ 4. click on start_website.bat
 
 To stop application:
  
  1. Type Ctrl+c in terminal
+ 2. run examdbstop.bat as admin
