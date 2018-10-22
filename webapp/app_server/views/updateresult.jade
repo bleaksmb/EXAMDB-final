@@ -1,0 +1,74 @@
+doctype html
+html
+  head
+    // Title of Page
+    title Exam Question Database
+    // Meta Tags
+    meta(charset='UTF-8')
+    meta(name='description', content='Find existing exam questions easily')
+    meta(name='author', content='Sam Fairs, Chen Liu, Joshua Milambo, Lachlan Bunney, Michael Bleakley, Raymond Luk')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='keywords', content='Physics, Exam, Question, Database, Latex')
+    // Links/References
+    link(rel='stylesheet', href='stylesheets/style.css')
+    link(href='https://fonts.googleapis.com/css?family=Poppins:400,400i,700', rel='stylesheet')
+  // Body of Page
+  body
+    // Navbar
+    nav.navbar
+      .navTitle
+        a(href='/index') Exam Question Database
+        form.navSearch(action='/results')
+          input#navSearch(type='text', placeholder="Light, Electricity, Gauss's Law", name='navSearch')
+          button(type='navSubmit')
+            img(width='40px', height='40px', src='images/search_icon.png')
+      ul.navMenu
+          li
+            a(href='/') Logout
+          li
+            a(href='/upload') Upload Question
+          li
+            a(href='/test') View Test
+          li
+            a(href='/testhistory') Update Result
+          -if(ifmaster)
+            li
+              a(href='/adduser') Add User 
+    .main
+      form#results.formContainer(method='POST',action='/updateresult?p='+pid, enctype='multipart/form-data')
+        h1 Update Result
+        .result.one.header
+          .split
+            h4 UNIT
+          .split
+            h4 BRIEF DESCRIPTION
+          .split
+            h4 DATE
+          .split
+            h4 CORRECT 
+          .split
+            h4 TOTAL STUDENTS
+          .split
+            h4 NOTES
+        - var i = 0;
+        each val in questions
+          .result.two
+            .split
+              p=val.unit
+            .split
+              p=val.short_description
+            .split
+              p=val.date
+            .split
+              input(type='text',value='',name='correct.' + i)
+            .split
+              input(type='text', value='',name='total.' + i)
+              input(type='hidden', value=val.q_id, name='qid.' + i)
+            .split
+              input(type='text', value='',name='notes.' + i)
+            -i++;
+        .result.one.header
+          button(type='submit', class='download') Update
+    // Footer
+    footer.footer
+      p Content on this website is licensed under a CC: Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License.

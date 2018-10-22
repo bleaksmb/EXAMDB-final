@@ -1,0 +1,63 @@
+doctype html
+html
+  head
+    // Title of Page
+    title Exam Question Database
+    // Meta Tags
+    meta(charset='UTF-8')
+    meta(name='description', content='Find existing exam questions easily')
+    meta(name='author', content='Sam Fairs, Chen Liu, Joshua Milambo, Lachlan Bunney, Michael Bleakley, Raymond Luk')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='keywords', content='Physics, Exam, Question, Database, Latex')
+    // Links/References
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='https://fonts.googleapis.com/css?family=Poppins:400,400i,700', rel='stylesheet')
+  // Body of Page
+  body
+    // Navbar
+    nav.navbar
+      .navTitle
+        a(href='/') Exam Question Database
+        form.navSearch(method='GET', action='/result')
+          input#navSearch(type='text', placeholder="Light, Electricity, Gauss's Law", name='navSearch')
+          button(type='navSubmit')
+            img(width='40px', height='40px', src='images/search_icon.png')
+      ul.navMenu
+          li
+            a(href='/') Logout
+          li
+            a(href='/upload') Upload Question
+          li
+            a(href='/test') View Test
+          li
+            a(href='/testhistory') Update Result
+          -if(ifmaster)
+            li
+              a(href='/adduser') Add User 
+    .main
+      #results.formContainer
+        h1 Test History
+        .result.one.header
+          .split2
+            h2 Unit Name
+          .split
+            h2 Test Name
+          .split
+            h2 Date
+          .split
+            h2 View Test
+        -each val in testhis
+          .result.two
+            .split2
+              p=val.unit
+            .split
+              p=val.assessment
+            .split
+              p=val.date
+            .split
+              a(href='/updateresults?p='+val.paper_id)
+                p Update Result
+              
+    // Footer
+    footer.footer
+      p Content on this website is licensed under a CC: Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License.

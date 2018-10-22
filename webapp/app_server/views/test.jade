@@ -1,0 +1,87 @@
+doctype html
+html
+  head
+    // Title of Page
+    title Exam Question Database
+    // Meta Tags
+    meta(charset='UTF-8')
+    meta(name='description', content='Find existing exam questions easily')
+    meta(name='author', content='Sam Fairs, Chen Liu, Joshua Milambo, Lachlan Bunney, Michael Bleakley, Minrui Lu')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='keywords', content='Physics, Exam, Question, Database, Latex')
+    // Links/References
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='https://fonts.googleapis.com/css?family=Poppins:400,400i,700', rel='stylesheet')
+  // Body of Page
+  body
+    // Navbar
+    nav.navbar
+      .navTitle
+        a(href='/') Exam Question Database
+        form.navSearch(method='get', action='result', enctype='multipart/form-data')
+          input#navSearch(type='text', placeholder="Light, Electricity, Gauss's Law", name='keywords')
+          button(type='navSubmit')
+            img(width='40px', height='40px', src='images/search_icon.png')
+      ul.navMenu
+          li
+            a(href='/') Logout
+          li
+            a(href='/upload') Upload Question
+          li
+            a(href='/test') View Test
+          li
+            a(href='/testhistory') Update Result
+          -if(ifmaster)
+            li
+              a(href='/adduser') Add User 
+    // Main
+    .main
+      // Test Qestions
+      #results.formContainer
+        h1 Test Questions
+        .result.one.header
+          .split4
+            h2 TITLE
+          .split4
+            h2 REMOVE
+        - each val in test
+          .result.two
+            .split4
+              a(href='/question?q='+val.q_id)
+                p=val.name
+            .split4
+              a(href='/delete?q='+val.q_id)
+                button(type='remove') X
+      // Test Detail
+      form(class='formContainer', id='resultslower', action='download', method='post', enctype='multipart/form-data')
+        h1 Test Detail
+        .result.one.header
+          .split4.left
+            h2 Institution:
+          .split4.right
+            h2
+              input(name='inst', type='text', value='UWA')
+        .result.one.header
+          .split4.left
+            h2 Unit Name:
+          .split4.right
+            h2
+              input(name='unit', type='text', value='')
+        .result.one.header
+          .split4.left
+            h2 Assessment Name:
+          .split4.right
+            h2
+              input(name='assessment', type='text', value='')
+        .result.one.header
+          .split4.left
+            h2 Date:
+          .split4.right
+            h2 
+              input(name='date', type='text', placeholder='DD/MM/YYYY')
+        .result.one.header
+          button(type='submit', class='download') Download
+        
+    // Footer
+    footer.footer
+      p Content on this website is licensed under a CC: Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License.
